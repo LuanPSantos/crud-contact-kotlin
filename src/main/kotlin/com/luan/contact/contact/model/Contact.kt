@@ -1,4 +1,4 @@
-package com.luan.contact.contact
+package com.luan.contact.contact.model
 
 import javax.persistence.*
 import javax.validation.constraints.Min

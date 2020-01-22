@@ -1,7 +1,7 @@
 package com.luan.contact.configuration
 
-import com.luan.contact.auth.JWTAuthorizationFilter
-import com.luan.contact.auth.JWTAuthenticationFilter
+import com.luan.contact.auth.filter.JWTAuthorizationFilter
+import com.luan.contact.auth.filter.JWTAuthenticationFilter
 import com.luan.contact.user.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
@@ -25,7 +25,11 @@ class SecurityConfiguration @Autowired constructor(
             .antMatchers(HttpMethod.POST, "/users").permitAll()
             .anyRequest().authenticated()
             .and()
-            .addFilterBefore(JWTAuthenticationFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterBefore(
+                JWTAuthenticationFilter(
+                    "/login",
+                    authenticationManager()
+                ), UsernamePasswordAuthenticationFilter::class.java)
             .addFilterBefore(JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter::class.java)
     }
 

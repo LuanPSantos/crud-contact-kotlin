@@ -17,7 +17,11 @@ class UserService @Autowired constructor(
     }
 
     fun save(user: User) {
-        user.password = BCryptPasswordEncoder().encode(user.password)
         this.userRepository.save(user)
+    }
+
+    fun create(user: User) {
+        user.password = BCryptPasswordEncoder().encode(user.password)
+        this.save(user)
     }
 }

@@ -17,6 +17,6 @@ class UserController @Autowired constructor(
     @PostMapping("users")
     @ResponseStatus(HttpStatus.CREATED)
     fun save(@RequestBody user: User) {
-        this.userService.save(user)
+        this.userService.create(user)
     }
 }

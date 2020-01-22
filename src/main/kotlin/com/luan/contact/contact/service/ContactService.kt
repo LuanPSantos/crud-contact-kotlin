@@ -1,5 +1,7 @@
-package com.luan.contact.contact
+package com.luan.contact.contact.service
 
+import com.luan.contact.contact.model.Contact
+import com.luan.contact.contact.repository.ContactRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
