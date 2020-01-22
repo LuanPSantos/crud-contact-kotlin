@@ -1,9 +1,7 @@
 package com.luan.contact.contact
 
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
+import javax.persistence.*
+import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
@@ -17,5 +15,8 @@ data class Contact(
     var name: String?,
     @get:NotBlank(message = "Telefone vazio")
     @get:NotNull(message = "Telefone nulo")
-    var phone: String?) {
+    var phone: String?,
+    @get:Min(value = 1, message = "Contato sem usuário")
+    @get:NotNull(message = "Contato sem usuário")
+    var userId: Long?) {
 }
