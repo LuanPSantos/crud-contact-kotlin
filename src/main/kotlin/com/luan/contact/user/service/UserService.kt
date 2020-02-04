@@ -16,12 +16,12 @@ class UserService @Autowired constructor(
         return this.userRepository.findByUsername(username)
     }
 
-    fun save(user: User) {
-        this.userRepository.save(user)
+    fun save(user: User): User {
+        return this.userRepository.save(user)
     }
 
-    fun create(user: User) {
-        user.password = BCryptPasswordEncoder().encode(user.password)
-        this.save(user)
+    fun create(user: User): User {
+        user.setPassword(BCryptPasswordEncoder().encode(user.password))
+        return this.save(user)
     }
 }

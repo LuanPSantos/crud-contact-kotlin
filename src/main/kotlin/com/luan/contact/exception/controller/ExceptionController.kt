@@ -1,6 +1,6 @@
 package com.luan.contact.exception.controller
 
-import com.luan.contact.exception.model.BaseException
+import com.luan.contact.exception.model.Error
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -12,8 +12,8 @@ class ExceptionController {
 
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    fun genericHandler(exception: Exception): BaseException {
-        return BaseException(
+    fun genericHandler(exception: Exception): Error {
+        return Error(
             listOf(
                 exception.message ?: "Erro desconhecido"
             )
@@ -22,11 +22,11 @@ class ExceptionController {
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun validationHandler(exception: MethodArgumentNotValidException): BaseException {
+    fun validationHandler(exception: MethodArgumentNotValidException): Error {
         val messages: MutableList<String> = mutableListOf();
 
         exception.bindingResult.allErrors.forEach { error -> messages.add(error.defaultMessage ?: "Erro desconhecido") }
 
-        return BaseException(messages);
+        return Error(messages);
     }
 }

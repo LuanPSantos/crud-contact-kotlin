@@ -22,6 +22,23 @@ class SecurityConfiguration @Autowired constructor(
             .cors().and()
             .csrf().disable()
             .authorizeRequests()
+            .antMatchers(HttpMethod.GET,
+                "/v2/api-docs",
+                "/configuration/ui",
+                "/swagger-resources/**",
+                "/configuration/security",
+                "/swagger-ui.html",
+                "/webjars/**",
+                "/v2/api-docs",
+                "/configuration/ui",
+                "/swagger-resources",
+                "/configuration/security",
+                "/swagger-ui.html",
+                "/webjars/**",
+                "/swagger-resources/configuration/ui",
+                "/swagger-ui.html").permitAll()
+            .antMatchers(HttpMethod.GET, "/webjars/springfox-swagger-ui/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
             .antMatchers(HttpMethod.POST, "/users").permitAll()
             .anyRequest().authenticated()
             .and()

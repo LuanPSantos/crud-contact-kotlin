@@ -1,5 +1,6 @@
 package com.luan.contact.user.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -14,7 +15,7 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long?,
     private var username: String,
-    private var password: String,
+    private var password: String?,
     var role: String = "USER"
 ): UserDetails {
 
@@ -22,10 +23,12 @@ class User(
         this.password = password
     }
 
+    @JsonIgnore
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf(SimpleGrantedAuthority("ROLE_$role"))
     }
 
+    @JsonIgnore
     override fun isEnabled(): Boolean {
         return true
     }
@@ -34,18 +37,22 @@ class User(
         return this.username
     }
 
+    @JsonIgnore
     override fun isCredentialsNonExpired(): Boolean {
         return true
     }
 
-    override fun getPassword(): String {
+    @JsonIgnore
+    override fun getPassword(): String? {
         return this.password
     }
 
+    @JsonIgnore
     override fun isAccountNonExpired(): Boolean {
         return true
     }
 
+    @JsonIgnore
     override fun isAccountNonLocked(): Boolean {
         return true
     }
