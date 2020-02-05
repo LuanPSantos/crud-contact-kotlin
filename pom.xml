@@ -136,6 +136,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>contact-be</finalName>
 		<sourceDirectory>src/main/kotlin</sourceDirectory>
 		<testSourceDirectory>src/test/kotlin</testSourceDirectory>
 		<plugins>
